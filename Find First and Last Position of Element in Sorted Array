@@ -1,0 +1,41 @@
+class Solution {
+    public int[] searchRange(int[] arr, int t) {
+        int left = 0 , right = arr.length-1;
+        int mid = (left+right)/2;
+
+        int[] pos = new int[2];
+            while (left<=right) {
+                mid = (left+right)/2;
+  
+                if(arr[mid] == t){
+                    int c =mid;
+
+                    // Find the rightmost occurrence of t
+                    while (c < arr.length && arr[c] == t) {
+                        c++;
+                    }
+                    pos[1] = c - 1;
+    
+                    c = mid;
+
+
+                    // Find the leftmost occurrence of t
+                    while (c >= 0 && arr[c] == t) {
+                        c--;
+                    }
+                    pos[0] = c + 1;
+    
+                    return pos;
+                }
+                else if(arr[mid] < t){
+                    left = mid+1;
+                }
+                else{
+                    
+                    right = mid-1;
+                }
+            }
+            
+            return new int[]{-1, -1};
+    }
+}
